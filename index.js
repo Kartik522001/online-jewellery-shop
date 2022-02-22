@@ -14,6 +14,7 @@ const customerAddressController = require("./controller/customer_address-control
 const orderDetailController = require("./controller/order_details-controller");
 const statusController = require("./controller/status-controller");
 const ProductController = require("./controller/product-controller");
+const OrderController = require("./controller/order-controller");
 
 
 const app = express();
@@ -115,6 +116,11 @@ app.post('/product', ProductController.addProduct);
 app.get('/product', ProductController.getAllProduct);
 app.delete('/product/:ProductId', ProductController.deleteProduct);
 app.put('/product', ProductController.updateProduct);
+
+app.post('/order', OrderController.addOrder);
+app.get('/order', OrderController.getAllOrder);
+app.delete('/order', OrderController.deleteOrder);
+app.put('/order', OrderController.updateOrder);
 
 
 
