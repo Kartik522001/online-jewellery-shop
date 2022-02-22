@@ -18,6 +18,7 @@ module.exports.addState = function (req, res) {
     })
 }
 
+
 module.exports.getAllStates = function (req, res) {
     StateModel.find(function (err, States) {
         if (err) {
@@ -36,6 +37,21 @@ module.exports.deleteStates = function (req, res) {
             res.json({ msg: "Something went wrong!!!", status: -1, data: err })
         } else {
             res.json({ msg: "state Delete...", status: -1, data: data })
+        }
+    })
+}
+
+
+module.exports.updateState = function (req, res) {
+
+    let stateId = req.params.stateId
+    let stateName = req.body.stateName
+
+    StateModel.updateOne({ _id: stateId }, { stateName: stateName }, function (err, data) {
+        if (err) {
+            res.json({ msg: "Something went wrong!!!", status: -1, data: err })
+        } else {
+            res.json({ msg: "State Update...", status: 200, data: data })
         }
     })
 }

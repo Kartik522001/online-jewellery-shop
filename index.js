@@ -11,6 +11,10 @@ const cityController = require("./controller/city-controller");
 const vendorDetailController = require("./controller/vendorDetail-controller");
 const cardController = require("./controller/card-controller");
 const customerAddressController = require("./controller/customer_address-controller");
+const orderDetailController = require("./controller/order_details-controller");
+const statusController = require("./controller/status-controller");
+const ProductController = require("./controller/product-controller");
+
 
 const app = express();
 const port = 3000; // Port 
@@ -73,7 +77,7 @@ app.put("/brands", brandController.updateBrand)
 app.post("/states", stateController.addState)
 app.get("/states", stateController.getAllStates)
 app.delete("/states/:stateId", stateController.deleteStates)
-// app.put("/states", stateController.updateState)
+app.put("/states", stateController.updateState)
 
 
 //city
@@ -96,6 +100,23 @@ app.post("/customerAddress", customerAddressController.addcustomerAddress);
 app.get("/customerAddress", customerAddressController.getAllcustomerAddress);
 app.delete("/customerAddress/:customerAddressId", customerAddressController.deletecustomerAddress);
 app.put("/customerAddress", customerAddressController.updatecustomerAddress)
+
+app.post('/orderDetails', orderDetailController.addOrderDetail);
+app.get('/orderDetails', orderDetailController.getAllorderDetails);
+app.delete('/orderDetails/:orderId', orderDetailController.deleteorderDetail);
+app.put('/orderDetails', orderDetailController.updateorderDetails);
+
+app.post('/status', statusController.addStatus);
+app.get('/status', statusController.getAllStatus);
+app.delete('/status/:statusId', statusController.deleteStatus);
+app.put('/status', statusController.updateStatus);
+
+app.post('/product', ProductController.addProduct);
+app.get('/product', ProductController.getAllProduct);
+app.delete('/product/:ProductId', ProductController.deleteProduct);
+app.put('/product', ProductController.updateProduct);
+
+
 
 app.listen(port, () => {
     console.log(`server started in http://localhost:${port}`);

@@ -53,7 +53,7 @@ module.exports.deleteorderDetail = function (req, res) {
     })
 }
 
-odule.exports.updatevendorDetails = function (req, res) {
+module.exports.updateorderDetails = function (req, res) {
     let orderId = req.body.orderId
     let user = req.body.user;
     let qty = req.body.qty;
