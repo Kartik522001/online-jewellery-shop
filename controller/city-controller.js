@@ -16,7 +16,7 @@ module.exports.addCity = function (req, res) {
             res.json({ msg: "something went wrong", data: err, status: -1 })
         }
         else {
-            res.json({ msg: "singup done ", data: data, status: 200 })
+            res.json({ msg: "City Added ", data: data, status: 200 })
         }
     })
 }
@@ -30,7 +30,7 @@ module.exports.getAllcities = function (req, res) {
             res.json({ msg: "something went wrong", data: err, status: -1 })
         }
         else {
-            res.json({ msg: "Cities ret... ", data: data, status: 200 })
+            res.json({ msg: "Cities... ", data: data, status: 200 })
         }
     })
 }
@@ -44,7 +44,7 @@ module.exports.deleteCity = function (req, res) {
         if (err) {
             res.json({ msg: "Something went wrong!!!", status: -1, data: err })
         } else {
-            res.json({ msg: "removed...", status: 200, data: success })
+            res.json({ msg: "city removed...", status: 200, data: success })
         }
     })
 }
@@ -61,7 +61,7 @@ module.exports.updateCity = function (req, res) {
         if (err) {
             res.json({ msg: "Something went wrong!!!", status: -1, data: err })
         } else {
-            res.json({ msg: "updated...", status: 200, data: data })
+            res.json({ msg: "City Update...", status: 200, data: data })
         }
     })
 

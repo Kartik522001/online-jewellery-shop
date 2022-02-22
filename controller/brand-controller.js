@@ -14,7 +14,7 @@ module.exports.addBrands = function (req, res) {
     brand.save(function (err, success) {
         if (err) {
             // console.log(err)
-            res.json({ msg: "SMW", status: -1, data: req.body })
+            res.json({ msg: "Something went wrong", status: -1, data: req.body })
         }
         else {
             res.json({ msg: "Brand added", status: 200, data: success })
@@ -29,7 +29,7 @@ module.exports.getAllBrand = function (req, res) {
         if (err) {
             res.json({ msg: "Something went wrong!!!", status: -1, data: err })
         } else {
-            res.json({ msg: "brands...", status: 200, data: brands })
+            res.json({ msg: "brands show", status: 200, data: brands })
 
         }
 
@@ -45,7 +45,7 @@ module.exports.deleteBrand = function (req, res) {
         if (err) {
             res.json({ msg: "Something went wrong!!!", status: -1, data: err })
         } else {
-            res.json({ msg: "removed...", status: 200, data: data })
+            res.json({ msg: "Brand Delete", status: 200, data: data })
         }
     })
 
@@ -60,7 +60,7 @@ module.exports.updateBrand = function (req, res) {
         if (err) {
             res.json({ msg: "Something went wrong!!!", status: -1, data: err })
         } else {
-            res.json({ msg: "updated...", status: 200, data: data })
+            res.json({ msg: "Brand Update", status: 200, data: data })
         }
     })
 

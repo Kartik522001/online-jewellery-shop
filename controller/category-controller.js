@@ -14,7 +14,7 @@ module.exports.addCategories = function (req, res) {
     category.save(function (err, success) {
         if (err) {
             // console.log(err)
-            res.json({ msg: "SMW", status: -1, data: req.body })
+            res.json({ msg: "Something went wrong", status: -1, data: req.body })
         }
         else {
             res.json({ msg: "category added", status: 200, data: success })

@@ -29,7 +29,7 @@ module.exports.addvendorDetail = function (req, res) {
             res.json({ msg: "something went wrong", data: err, status: -1 })
         }
         else {
-            res.json({ msg: "singup done ", data: data, status: 200 })
+            res.json({ msg: "Vendor Detail Add ", data: data, status: 200 })
         }
     })
 
@@ -45,7 +45,7 @@ module.exports.getAllvendorDetails = function (req, res) {
             res.json({ msg: "something went wrong", data: err, status: -1 })
         }
         else {
-            res.json({ msg: "Cities ret... ", data: data, status: 200 })
+            res.json({ msg: "vendor show ", data: data, status: 200 })
         }
     })
 }

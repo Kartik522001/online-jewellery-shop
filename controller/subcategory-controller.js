@@ -13,9 +13,9 @@ module.exports.addSubcategory = function (req, res) {
     })
     subcategory.save(function (err, data) {
         if (err) {
-            res.json({ msg: "SMW", data: err, status: -1 })
+            res.json({ msg: "Something went wrong!!!", data: err, status: -1 })
         } else {
-            res.json({ msg: "Signup done", data: data, status: 200 })
+            res.json({ msg: "Subcategory Add", data: data, status: 200 })
         }
     })
 }
@@ -24,9 +24,9 @@ module.exports.addSubcategory = function (req, res) {
 module.exports.getAllSubcategories = function (req, res) {
     SubcategoryModel.find().populate("category").exec(function (err, data) {
         if (err) {
-            res.json({ msg: "SMW", data: err, status: -1 })
+            res.json({ msg: "Something went wrong!!!", data: err, status: -1 })
         } else {
-            res.json({ msg: "subcategories ret...", data: data, status: 200 })
+            res.json({ msg: "subcategories ...", data: data, status: 200 })
         }
     })
 }

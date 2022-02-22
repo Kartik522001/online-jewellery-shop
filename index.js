@@ -9,7 +9,8 @@ const subcategoryController = require("./controller/subcategory-controller");
 const stateController = require("./controller/state-controller");
 const cityController = require("./controller/city-controller");
 const vendorDetailController = require("./controller/vendorDetail-controller");
-
+const cardController = require("./controller/card-controller");
+const customerAddressController = require("./controller/customer_address-controller");
 
 const app = express();
 const port = 3000; // Port 
@@ -87,6 +88,14 @@ app.post("/vendordetails", vendorDetailController.addvendorDetail)
 app.get("/vendordetails", vendorDetailController.getAllvendorDetails)
 app.delete("/vendordetails/:vendorId", vendorDetailController.deletevendorDetail)
 app.put("/vendordetails", vendorDetailController.updatevendorDetails)
+
+app.post("/card", cardController.addCard);
+app.delete("/card/:cardId", cardController.deleteCard);
+
+app.post("/customerAddress", customerAddressController.addcustomerAddress);
+app.get("/customerAddress", customerAddressController.getAllcustomerAddress);
+app.delete("/customerAddress/:customerAddressId", customerAddressController.deletecustomerAddress);
+app.put("/customerAddress", customerAddressController.updatecustomerAddress)
 
 app.listen(port, () => {
     console.log(`server started in http://localhost:${port}`);

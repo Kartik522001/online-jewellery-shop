@@ -9,7 +9,7 @@ module.exports.addState = function (req, res) {
     })
     state.save(function (err, success) {
         if (err) {
-            res.json({ msg: "SMW", status: -1, data: req.body })
+            res.json({ msg: "Something went wrong!!!", status: -1, data: req.body })
         }
         else {
             res.json({ msg: "State added", status: 200, data: success })
@@ -21,7 +21,7 @@ module.exports.addState = function (req, res) {
 module.exports.getAllStates = function (req, res) {
     StateModel.find(function (err, States) {
         if (err) {
-            res.json({ msg: "SMW", status: -1, data: err })
+            res.json({ msg: "Something went wrong!!!", status: -1, data: err })
         } else {
             res.json({ msg: "States...", status: -1, data: States })
         }
@@ -33,9 +33,9 @@ module.exports.deleteStates = function (req, res) {
 
     StateModel.deleteOne({ "_id": stateId }, function (err, data) {
         if (err) {
-            res.json({ msg: "SMW", status: -1, data: err })
+            res.json({ msg: "Something went wrong!!!", status: -1, data: err })
         } else {
-            res.json({ msg: "States...", status: -1, data: data })
+            res.json({ msg: "state Delete...", status: -1, data: data })
         }
     })
 }

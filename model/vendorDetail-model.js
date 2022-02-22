@@ -23,15 +23,15 @@ const vendorDetailSchema = new mongoose.Schema({
     },
     user: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "user"
+        ref: "users"
     },
     state: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "state"
+        ref: "states"
     },
     city: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "city"
+        ref: "cities"
     }
 
 
