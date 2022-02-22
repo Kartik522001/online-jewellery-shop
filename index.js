@@ -15,6 +15,7 @@ const orderDetailController = require("./controller/order_details-controller");
 const statusController = require("./controller/status-controller");
 const ProductController = require("./controller/product-controller");
 const OrderController = require("./controller/order-controller");
+const vendorProductController = require("./controller/vendor_product-controller");
 
 
 const app = express();
@@ -119,8 +120,14 @@ app.put('/product', ProductController.updateProduct);
 
 app.post('/order', OrderController.addOrder);
 app.get('/order', OrderController.getAllOrder);
-app.delete('/order', OrderController.deleteOrder);
+app.delete('/order/:orderId', OrderController.deleteOrder);
 app.put('/order', OrderController.updateOrder);
+
+app.post('/vendorProducts', vendorProductController.addvendorProduct);
+app.get('/vendorProducts', vendorProductController.getAllvendorProducts);
+app.delete('/vendorProduct', vendorProductController.deletevendorProduct);
+app.put('/vendorProduct', vendorProductController.updatevendorProduct);
+
 
 
 
