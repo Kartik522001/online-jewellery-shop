@@ -19,8 +19,11 @@ const CustomerAddressScheme = new mongoose.Schema({
         ref: "cities"
     },
     pincode: {
-        type: String,
-    }
+        type: Number,
+    },
+    isActive: {
+        type: Boolean
+    },
 
 })
 

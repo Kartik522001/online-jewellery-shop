@@ -13,7 +13,7 @@ let cardSchema = new mongoose.Schema({
         ref: "vendorProduct"
     },
     qty: {
-        type: String,
+        type: Number,
     }
 })
 

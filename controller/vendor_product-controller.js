@@ -3,13 +3,13 @@ const vendorProductController = require('../model/vendor_product-model');
 module.exports.addvendorProduct = function (req, res) {
 
     let product = req.body.product;
-    let vendor = req.body.vendor;
+    let vendorDetail = req.body.vendorDetail;
     let qty = req.body.qty;
     let price = req.body.price;
 
     let vendorProduct = new vendorProductController({
         product: product,
-        vendor: vendor,
+        vendorDetail: vendorDetail,
         qty: qty,
         price: price
     })
@@ -27,23 +27,18 @@ module.exports.addvendorProduct = function (req, res) {
 
 }
 
-
 module.exports.getAllvendorProducts = function (req, res) {
-    //REST 
-    vendorProductController.find(function (err, categories) {
+    vendorProductModel.find().populate("product").populate("vendorDetail").exec(function (err, data) {
         if (err) {
-            res.json({ msg: "Something went wrong!!!", status: -1, data: err })
+            res.json({ msg: "SMW", status: -1, data: err })
         } else {
-            res.json({ msg: "Vendor Product...", status: 200, data: categories })
-
+            res.json({ msg: "show your list", status: 200, data: data })
         }
-
     })
-
 }
 
 module.exports.deletevendorProduct = function (req, res) {
-    let vendorProductId = req.body.vendorProductId;
+    let vendorProductId = req.params.vendorProductId;
 
 
     vendorProductController.deleteOne({ "_id": vendorProductId }, function (err, data) {
@@ -61,11 +56,11 @@ module.exports.updatevendorProduct = function (req, res) {
 
     let vendorProductId = req.body.vendorProductId;
     let product = req.body.product;
-    let vendor = req.body.vendor;
+    let vendorDetail = req.body.vendorDetail
     let qty = req.body.qty;
     let price = req.body.price;
 
-    vendorProductController.updateOne({ _id: vendorProductId }, { product: product, vendor: vendor, qty: qty, price: price }, function (err, data) {
+    vendorProductController.updateOne({ _id: vendorProductId }, { product: product, vendorDetail: vendorDetail, qty: qty, price: price }, function (err, data) {
         if (err) {
             res.json({ msg: "Something went wrong!!!", status: -1, data: err })
         } else {

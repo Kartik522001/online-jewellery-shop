@@ -16,7 +16,7 @@ const statusController = require("./controller/status-controller");
 const ProductController = require("./controller/product-controller");
 const OrderController = require("./controller/order-controller");
 const vendorProductController = require("./controller/vendor_product-controller");
-
+const paymentController = require("./controller/payment-controller")
 
 const app = express();
 const port = 3000; // Port 
@@ -52,6 +52,7 @@ app.get("/roles", rolesController.getAllRoles);
 app.delete("/roles/:roleId", rolesController.deleteRole);
 app.put("/roles", rolesController.updateRole);
 
+// users
 app.post("/users", userController.addUser)
 app.get("/users", userController.getAllUsers)
 app.delete("/users/:userId", userController.deleteUser)
@@ -95,41 +96,53 @@ app.get("/vendordetails", vendorDetailController.getAllvendorDetails)
 app.delete("/vendordetails/:vendorId", vendorDetailController.deletevendorDetail)
 app.put("/vendordetails", vendorDetailController.updatevendorDetails)
 
+// card
 app.post("/card", cardController.addCard);
+app.get("/card", cardController.getAllcarts);
+app.put("/card", cardController.updatecart);
 app.delete("/card/:cardId", cardController.deleteCard);
 
+// customerAddress
 app.post("/customerAddress", customerAddressController.addcustomerAddress);
 app.get("/customerAddress", customerAddressController.getAllcustomerAddress);
 app.delete("/customerAddress/:customerAddressId", customerAddressController.deletecustomerAddress);
 app.put("/customerAddress", customerAddressController.updatecustomerAddress)
 
+// orderDetails
 app.post('/orderDetails', orderDetailController.addOrderDetail);
-app.get('/orderDetails', orderDetailController.getAllorderDetails);
+app.get('/orderDetails', orderDetailController.getAllOrder_details);
 app.delete('/orderDetails/:orderId', orderDetailController.deleteorderDetail);
 app.put('/orderDetails', orderDetailController.updateorderDetails);
 
+// status
 app.post('/status', statusController.addStatus);
 app.get('/status', statusController.getAllStatus);
 app.delete('/status/:statusId', statusController.deleteStatus);
 app.put('/status', statusController.updateStatus);
 
+// product
 app.post('/product', ProductController.addProduct);
-app.get('/product', ProductController.getAllProduct);
+app.get('/product', ProductController.getAllproducts);
 app.delete('/product/:ProductId', ProductController.deleteProduct);
 app.put('/product', ProductController.updateProduct);
 
+// order
 app.post('/order', OrderController.addOrder);
-app.get('/order', OrderController.getAllOrder);
+app.get('/order', OrderController.getAllOrders);
 app.delete('/order/:orderId', OrderController.deleteOrder);
 app.put('/order', OrderController.updateOrder);
 
+// vendorProduct
 app.post('/vendorProducts', vendorProductController.addvendorProduct);
 app.get('/vendorProducts', vendorProductController.getAllvendorProducts);
 app.delete('/vendorProduct', vendorProductController.deletevendorProduct);
 app.put('/vendorProduct', vendorProductController.updatevendorProduct);
 
-
-
+// payment
+app.post("/payments", paymentController.addpayment)
+app.get("/payments", paymentController.getAllpayments)
+app.delete("/payments/:paymentId", paymentController.deletepayment)
+app.put("/payments", paymentController.updatepayment)
 
 app.listen(port, () => {
     console.log(`server started in http://localhost:${port}`);

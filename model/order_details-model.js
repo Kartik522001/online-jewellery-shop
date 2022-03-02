@@ -10,10 +10,10 @@ const orderDetailSchema = new mongoose.Schema({
         ref: "users",
     },
     qty: {
-        type: String
+        type: Number
     },
     price: {
-        type: String
+        type: Number
     },
     vendorProduct: {
         type: mongoose.Schema.Types.ObjectId,

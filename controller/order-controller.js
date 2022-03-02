@@ -25,21 +25,19 @@ module.exports.addOrder = function (err, data) {
     })
 }
 
-module.exports.getAllOrder = function (req, res) {
-    //REST 
-    OrderController.find(function (err, categories) {
+module.exports.getAllOrders = function (req, res) {
+    OrderController.find().populate("status").populate("user").populate("address").exec(function (err, data) {
         if (err) {
-            res.json({ msg: "Something went wrong!!!", status: -1, data: err })
+            res.json({ msg: "SMW", data: err, status: -1 })//-1  [ 302 404 500 ]
         } else {
-            res.json({ msg: "Order...", status: 200, data: categories })
-
+            res.json({ msg: "show your list ", data: data, status: 200 })//http status code 
         }
-
     })
 }
 
+
 module.exports.deleteOrder = function (req, res) {
-    let OrderId = req.body.OrderId
+    let OrderId = req.params.OrderId
 
 
     OrderController.deleteOne({ "_id": OrderId }, function (err, data) {

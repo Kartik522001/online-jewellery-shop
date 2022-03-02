@@ -27,14 +27,12 @@ module.exports.addOrderDetail = function (req, res) {
 }
 
 
-module.exports.getAllorderDetails = function (req, res) {
-
-    orderDetail.find().populate("user").populate("order").populate("price").exec(function (err, data) {
+module.exports.getAllOrder_details = function (req, res) {
+    orderdetailModel.find().populate("user").populate("order").populate("vendorproduct").exec(function (err, data) {
         if (err) {
-            res.json({ msg: "something went wrong", data: err, status: -1 })
-        }
-        else {
-            res.json({ msg: "Order Are showing ", data: data, status: 200 })
+            res.json({ msg: "SMW", data: err, status: -1 })
+        } else {
+            res.json({ msg: "show your list", data: data, status: 200 })
         }
     })
 }
@@ -59,9 +57,10 @@ module.exports.updateorderDetails = function (req, res) {
     let qty = req.body.qty;
     let price = req.body.price;
     let vendorProduct = req.body.vendorProduct;
+    let order = req.body.order;
 
 
-    OrderDetailModel.updateOne({ _id: orderId }, { user: user, qty: qty, price: price, vendorProduct: vendorProduct }, function (err, data) {
+    OrderDetailModel.updateOne({ _id: orderId }, { user: user, qty: qty, price: price, vendorProduct: vendorProduct, order: order }, function (err, data) {
         if (err) {
             res.json({ msg: "Something went wrong!!!", status: -1, data: err })
         } else {

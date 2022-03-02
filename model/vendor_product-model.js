@@ -6,15 +6,15 @@ const vendorProductSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "Product"
     },
-    vendor: {
+    vendorDetail: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "vendordetails"
     },
     qty: {
-        type: String,
+        type: Number,
     },
     price: {
-        type: String,
+        type: Number,
     }
 })
 

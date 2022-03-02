@@ -20,6 +20,17 @@ module.exports.addCard = function (req, res) {
     })
 }
 
+module.exports.getAllcarts = function (req, res) {
+    CardModel.find().populate("user").populate("vendorproduct").exec(function (err, data) {
+        if (err) {
+            res.json({ msg: "Somthing went wrong", status: -1, data: err })
+        } else {
+            res.json({ msg: "show your list", status: 200, data: data })
+        }
+
+    })
+}
+
 module.exports.deleteCard = function (req, res) {
     let cardId = req.params.cardId
 
@@ -28,6 +39,21 @@ module.exports.deleteCard = function (req, res) {
             res.json({ msg: "Delete went wrong", data: err, status: -1 })//-1  [ 302 404 500 ]
         } else {
             res.json({ msg: "Delete done", data: data, status: 200 })//http status code 
+        }
+    })
+}
+
+module.exports.updatecart = function (req, res) {
+    let cartId = req.body.cartId
+    let qty = req.body.qty
+    let vendorproduct = req.body.vendorproduct
+    let user = req.body.user
+
+    CardModel.updateOne({ _id: cartId }, { qty: qty, vendorproduct: vendorproduct, usre: user }, function (err, data) {
+        if (err) {
+            res.json({ msg: "Something went wrong!!!", status: -1, data: err })
+        } else {
+            res.json({ msg: "updated...", status: 200, data: data })
         }
     })
 }

@@ -27,19 +27,17 @@ module.exports.addProduct = function (req, res) {
 }
 
 
-module.exports.getAllProduct = function (req, res) {
-    //REST 
-    ProductModel.find(function (err, categories) {
+module.exports.getAllproducts = (req, res) => {
+    ProductModel.find().populate("category").populate("subcategory").populate("brand").exec(function (err, data) {
         if (err) {
-            res.json({ msg: "Something went wrong!!!", status: -1, data: err })
-        } else {
-            res.json({ msg: "Product...", status: 200, data: categories })
-
+            res.json({ msg: "something went wrong", data: err, status: -1 })
         }
-
+        else {
+            res.json({ msg: "Cities ret... ", data: data, status: 200 })
+        }
     })
-
 }
+
 
 
 module.exports.deleteProduct = function (req, res) {

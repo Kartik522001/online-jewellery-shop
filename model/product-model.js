@@ -19,7 +19,7 @@ const ProductSchema = new mongoose.Schema({
         ref: "brands"
     },
     basePrice: {
-        type: String,
+        type: Number,
     }
 })
 

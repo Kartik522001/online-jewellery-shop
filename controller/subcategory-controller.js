@@ -6,10 +6,12 @@ module.exports.addSubcategory = function (req, res) {
 
     let subcategoryName = req.body.subcategoryName
     let category = req.body.category
+    let isActive = req.body.isActive
 
     let subcategory = new SubcategoryModel({
         subcategoryName: subcategoryName,
-        category: category
+        category: category,
+        isActive: isActive
     })
     subcategory.save(function (err, data) {
         if (err) {
@@ -39,7 +41,7 @@ module.exports.deleteSubcategory = function (req, res) {
 
     SubcategoryModel.deleteOne({ _id: subcategoryId }, function (err, data) {
         if (err) {
-            res.json({ msg: "SMW", data: err, status: -1 })//-1  [ 302 404 500 ]
+            res.json({ msg: "something went wrong", data: err, status: -1 })//-1  [ 302 404 500 ]
         } else {
             res.json({ msg: "user removed...", data: data, status: 200 })//http status code 
         }
@@ -52,9 +54,10 @@ module.exports.updateSubcategory = function (req, res) {
 
     let subcategoryId = req.body.subcategoryId
     let subcategoryName = req.body.subcategoryName
+    let isActive = req.body.isActive;
 
 
-    SubcategoryModel.updateOne({ _id: subcategoryId }, { subcategoryName: subcategoryName }, function (err, data) {
+    SubcategoryModel.updateOne({ _id: subcategoryId }, { subcategoryName: subcategoryName, isActive: isActive }, function (err, data) {
         if (err) {
             res.json({ msg: "Something went wrong!!!", status: -1, data: err })
         } else {
