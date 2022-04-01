@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors')
 const mongoose = require('mongoose');
 const sessionController = require("./controller/session-controller");
 const rolesController = require("./controller/role-controller");
@@ -19,11 +20,12 @@ const vendorProductController = require("./controller/vendor_product-controller"
 const paymentController = require("./controller/payment-controller")
 
 const app = express();
-const port = 3000; // Port 
+const port = 4001; // Port 
 
 // middle ware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cors());
 
 // database
 
@@ -42,7 +44,7 @@ app.get('/', (req, res) => {
     res.send("Hello World");
 })
 
-app.get("/Login", sessionController.login);
+// app.get("/Login", sessionController.login);
 app.get("/Signup", sessionController.signup);
 app.post("/saveuser", sessionController.saveuser);
 
