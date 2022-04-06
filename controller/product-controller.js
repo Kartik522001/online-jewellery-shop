@@ -71,3 +71,37 @@ module.exports.updateProduct = function (req, res) {
     })
 
 }
+
+module.exports.getById = function (req, res) {
+
+    let id = req.params.productId;
+
+
+    ProductModel.findById({ _id: id }, function (err, data) {
+        if (err) {
+            res.json({ msg: "Something went wrong!!!", status: -1, data: err });
+        } else {
+            res.json({ msg: "users...", status: 200, data: data });
+        }
+    })
+}
+
+module.exports.updateById = function (req, res) {
+
+    let productId = req.params.productId
+    let productName = req.body.productName
+    let baseprice = req.body.baseprice
+    let category = req.body.category
+    let subcategory = req.body.subcategory
+    let brand = req.body.brand
+
+
+
+    ProductModel.findByIdAndUpdate({ _id: productId }, { productName: productName, baseprice: baseprice, category: category, subcategory: subcategory, brand: brand }, function (err, data) {
+        if (err) {
+            res.json({ msg: "Something went wrong!!!", status: -1, data: err });
+        } else {
+            res.json({ msg: "users...", status: 200, data: data });
+        }
+    })
+}

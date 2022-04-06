@@ -38,6 +38,21 @@ module.exports.getAllRoles = function (req, res) {
     })
 }
 // /sdfdsfsdfdsf 
+
+module.exports.getById = function (req, res) {
+
+    let id = req.params.roleId;
+
+
+    RoleModel.findById({ _id: id }, function (err, data) {
+        if (err) {
+            res.json({ msg: "Something went wrong!!!", status: -1, data: err });
+        } else {
+            res.json({ msg: "roles...", status: 200, data: data });
+        }
+    })
+}
+
 module.exports.deleteRole = function (req, res) {
     let roleId = req.params.roleId
     //delete from role where roleId = 1 
@@ -67,4 +82,18 @@ module.exports.updateRole = function (req, res) {
         }
     })
 
+}
+
+module.exports.updateById = function (req, res) {
+
+    let id = req.params.roleId;
+    let roleName = req.body.roleName
+
+    RoleModel.findByIdAndUpdate({ _id: id }, { roleName: roleName }, function (err, data) {
+        if (err) {
+            res.json({ msg: "Something went wrong!!!", status: -1, data: err });
+        } else {
+            res.json({ msg: "roles...", status: 200, data: data });
+        }
+    })
 }

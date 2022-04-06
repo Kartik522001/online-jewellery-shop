@@ -41,6 +41,37 @@ module.exports.getAllUsers = function (req, res) {
     })
 }
 
+module.exports.updateById = function (req, res) {
+
+    let id = req.params.userId;
+    let username = req.body.username
+    let email = req.body.email;
+    let password = req.body.password;
+    let role = req.body.role
+
+
+    UserModel.findByIdAndUpdate({ _id: id }, { username: username, email: email, password: password, role: role }, function (err, data) {
+        if (err) {
+            res.json({ msg: "Something went wrong!!!", status: -1, data: err });
+        } else {
+            res.json({ msg: "users...", status: 200, data: data });
+        }
+    })
+}
+
+module.exports.getById = function (req, res) {
+
+    let id = req.params.userId;
+
+
+    UserModel.findById({ _id: id }, function (err, data) {
+        if (err) {
+            res.json({ msg: "Something went wrong!!!", status: -1, data: err });
+        } else {
+            res.json({ msg: "users...", status: 200, data: data });
+        }
+    })
+}
 
 //delete
 module.exports.deleteUser = function (req, res) {

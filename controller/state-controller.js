@@ -55,3 +55,27 @@ module.exports.updateState = function (req, res) {
         }
     })
 }
+
+module.exports.getById = function (req, res) {
+    let id = req.params.stateId;
+    StateModel.findById({ _id: id }, function (err, data) {
+        if (err) {
+            res.json({ msg: "Something went wrong!!!", status: -1, data: err });
+        } else {
+            res.json({ msg: "roles...", status: 200, data: data });
+        }
+    })
+}
+
+module.exports.updateById = function (req, res) {
+    let stateName = req.body.stateName
+    let id = req.params.stateId
+
+    StateModel.findByIdAndUpdate({ _id: id }, { stateName: stateName }, function (err, data) {
+        if (err) {
+            res.json({ msg: "Something went wrong!!!", status: -1, data: err });
+        } else {
+            res.json({ msg: "roles...", status: 200, data: data });
+        }
+    })
+}

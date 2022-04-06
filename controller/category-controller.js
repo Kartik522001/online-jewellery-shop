@@ -65,5 +65,33 @@ module.exports.updateCategory = function (req, res) {
             res.json({ msg: "updated...", status: 200, data: data })
         }
     })
-
 }
+
+module.exports.getById = function (req, res) {
+    let id = req.params.categoryId;
+
+    CategoryModel.findById({ _id: id }, function (err, data) {
+        if (err) {
+            res.json({ msg: "Something went wrong!!!", status: -1, data: err });
+        } else {
+            res.json({ msg: "users...", status: 200, data: data });
+        }
+    });
+};
+
+module.exports.updateById = function (req, res) {
+    let id = req.params.categoryId;
+    let categoryName = req.body.categoryName;
+
+    CategoryModel.findByIdAndUpdate(
+        { _id: id },
+        { categoryName: categoryName },
+        function (err, data) {
+            if (err) {
+                res.json({ msg: "Something went wrong!!!", status: -1, data: err });
+            } else {
+                res.json({ msg: "users...", status: 200, data: data });
+            }
+        }
+    );
+};

@@ -87,3 +87,39 @@ module.exports.updatevendorDetails = function (req, res) {
         }
     })
 }
+
+module.exports.getById = function (req, res) {
+
+    let id = req.params.vendorId;
+
+
+    vendorModel.findById({ _id: id }, function (err, data) {
+        if (err) {
+            res.json({ msg: "Something went wrong!!!", status: -1, data: err });
+        } else {
+            res.json({ msg: "vendor...", status: 200, data: data });
+        }
+    })
+}
+
+module.exports.updateById = function (req, res) {
+
+    let id = req.params.vendorId;
+    let vendorName = req.body.vendorName
+    let contactNumber = req.body.contactNumber
+    let address = req.body.address
+    let email = req.body.email
+    let pincode = req.body.pincode
+    let user = req.body.user
+    let state = req.body.state
+    let city = req.body.city
+    let isActive = req.body.isActive
+
+    vendorModel.findByIdAndUpdate({ _id: id }, { vendorName: vendorName, contactNumber: contactNumber, address: address, email: email, pincode: pincode, user: user, state: state, city: city, isActive: isActive }, function (err, data) {
+        if (err) {
+            res.json({ msg: "Something went wrong!!!", status: -1, data: err });
+        } else {
+            res.json({ msg: "roles...", status: 200, data: data });
+        }
+    })
+}
