@@ -25,7 +25,7 @@ module.exports.addCity = function (req, res) {
 //list
 module.exports.getAllcities = function (req, res) {
 
-    CityModel.find().populate("state").exec(function (err, data) {
+    CityModel.find().populate("states").exec(function (err, data) {
         if (err) {
             res.json({ msg: "something went wrong", data: err, status: -1 })
         }
@@ -65,4 +65,44 @@ module.exports.updateCity = function (req, res) {
         }
     })
 
+}
+
+module.exports.getByStateId = function (req, res) {
+
+    let id = req.params.stateId;
+    console.log(id)
+
+    CityModel.find({ state: id }).populate('state').exec(function (err, data) {
+        if (err) {
+            res.json({ msg: "Something went wrong!!!", status: -1, data: err });
+        } else {
+            res.json({ msg: "city...123", status: 200, data: data });
+        }
+    })
+}
+
+module.exports.updateById = function (req, res) {
+
+    let id = req.params.cityId;
+    let cityName = req.body.cityName
+
+
+    UserModel.findByIdAndUpdate({ _id: id }, { cityName: cityName }, function (err, data) {
+        if (err) {
+            res.json({ msg: "Something went wrong!!!", status: -1, data: err });
+        } else {
+            res.json({ msg: "users...", status: 200, data: data });
+        }
+    })
+}
+
+module.exports.getById = function (req, res) {
+    let id = req.params.cityId;
+    CityModel.findById({ _id: id }, function (err, data) {
+        if (err) {
+            res.json({ msg: "Something went wrong!!!", status: -1, data: err });
+        } else {
+            res.json({ msg: "cities...", status: 200, data: data });
+        }
+    })
 }

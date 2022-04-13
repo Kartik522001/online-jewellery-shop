@@ -1,21 +1,22 @@
 const ProductModel = require('../model/product-model');
+const CategoryModel = require('../model/category-model');
 
 module.exports.addProduct = function (req, res) {
     let productName = req.body.productName;
     let category = req.body.category
-    let subcategory = req.body.subcategory
     let brand = req.body.brand;
-    let basePrice = req.body.basePrice;
+    let baseprice = req.body.baseprice;
+    let img = req.body.img;
 
     let product = ProductModel({
         productName: productName,
         category: category,
-        subcategory: subcategory,
+        img: img,
         brand: brand,
-        basePrice: basePrice,
+        baseprice: baseprice,
     })
 
-    product.save(function (err, data) {
+    product.save(function (err, success) {
         if (err) {
             // console.log(err)
             res.json({ msg: "Something went wrong", status: -1, data: req.body })
@@ -27,15 +28,27 @@ module.exports.addProduct = function (req, res) {
 }
 
 
-module.exports.getAllproducts = (req, res) => {
-    ProductModel.find().populate("category").populate("subcategory").populate("brand").exec(function (err, data) {
+module.exports.getAllproducts1 = (req, res) => {
+
+    ProductModel.find(function (err, data) {
         if (err) {
-            res.json({ msg: "something went wrong", data: err, status: -1 })
-        }
-        else {
-            res.json({ msg: "Cities ret... ", data: data, status: 200 })
+            res.json({ msg: "Something went wrong!!!", data: err, status: -1 })
+        } else {
+            res.json({ msg: "subcategories ...", data: data, status: 200 })
         }
     })
+}
+
+
+module.exports.getAllproducts = (req, res) => {
+    ProductModel.find(function (err, data) {
+        if (err) {
+            res.json({ msg: "Something went wrong!!!", data: err, status: -1 })
+        } else {
+            res.json({ msg: "subcategories ...", data: data, status: 200 })
+        }
+    })
+
 }
 
 
@@ -58,11 +71,11 @@ module.exports.updateProduct = function (req, res) {
     let ProductId = req.body.ProductId;
     let productName = req.body.productName;
     let category = req.body.category;
-    let subcategory = req.body.subcategory
+    let img = req.body.img
     let brand = req.body.brand;
-    let basePrice = req.body.basePrice;
+    let baseprice = req.body.baseprice;
 
-    ProductModel.updateOne({ _id: ProductId }, { productName: productName, category: category, subcategory: subcategory, brand: brand, basePrice: basePrice }, function (err, data) {
+    ProductModel.updateOne({ _id: ProductId }, { productName: productName, img: img, category: category, subcategory: subcategory, brand: brand, baseprice: baseprice }, function (err, data) {
         if (err) {
             res.json({ msg: "Something went wrong!!!", status: -1, data: err })
         } else {
@@ -77,7 +90,7 @@ module.exports.getById = function (req, res) {
     let id = req.params.productId;
 
 
-    ProductModel.findById({ _id: id }, function (err, data) {
+    ProductModel.findById({ _id: id }).populate('category').exec(function (err, data) {
         if (err) {
             res.json({ msg: "Something went wrong!!!", status: -1, data: err });
         } else {
@@ -92,16 +105,27 @@ module.exports.updateById = function (req, res) {
     let productName = req.body.productName
     let baseprice = req.body.baseprice
     let category = req.body.category
-    let subcategory = req.body.subcategory
+    let img = req.body.img
     let brand = req.body.brand
 
 
 
-    ProductModel.findByIdAndUpdate({ _id: productId }, { productName: productName, baseprice: baseprice, category: category, subcategory: subcategory, brand: brand }, function (err, data) {
+    ProductModel.findByIdAndUpdate({ _id: productId }, { productName: productName, img: img, baseprice: baseprice, category: category, subcategory: subcategory, brand: brand }, function (err, data) {
         if (err) {
             res.json({ msg: "Something went wrong!!!", status: -1, data: err });
         } else {
             res.json({ msg: "users...", status: 200, data: data });
+        }
+    })
+}
+
+module.exports.getoneproducts = (req, res) => {
+    ProductModel.findOne().populate("category").exec(function (err, data) {
+        if (err) {
+            res.json({ msg: "something went wrong", data: err, status: -1 })
+        }
+        else {
+            res.json({ msg: "Cities ret... ", data: data, status: 200 })
         }
     })
 }

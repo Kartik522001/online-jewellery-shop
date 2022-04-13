@@ -70,3 +70,16 @@ module.exports.updateorderDetails = function (req, res) {
 }
 
 
+module.exports.getById = function (req, res) {
+
+    let id = req.params.orderId;
+
+
+    orderdetailModel.findById({ _id: id }, function (err, data) {
+        if (err) {
+            res.json({ msg: "Something went wrong!!!", status: -1, data: err });
+        } else {
+            res.json({ msg: "order details...", status: 200, data: data });
+        }
+    })
+}

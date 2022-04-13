@@ -32,7 +32,7 @@ module.exports.addUser = function (req, res) {
 //list
 module.exports.getAllUsers = function (req, res) {
 
-    UserModel.find().populate("role").exec(function (err, data) {
+    UserModel.find(function (err, data) {
         if (err) {
             res.json({ msg: "Something went wrong!!!", data: err, status: -1 })//-1  [ 302 404 500 ]
         } else {
@@ -111,3 +111,24 @@ module.exports.login = function (req, res) {
     })
 
 }
+
+module.exports.loginAdmin = function (req, res) {
+    let id = '62301d5dee1b25e47af7e8cc'
+    let password = req.body.password;
+
+    let isCorrect = false;
+
+    UserModel.findOne({ _id: id }).populate('role').exec(function (err, data) {
+        if (data) {
+            let ans = bcrypt.compareSync(password, data.password);
+            if (ans == true) {
+                isCorrect = true;
+            }
+        }
+        if (isCorrect == false) {
+            res.json({ msg: "Admin Invalid ", data: req.body, status: -1 }); //-1  [ 302 404 500 ]
+        } else {
+            res.json({ msg: "Login....", data: data, status: 200 }); //http status code
+        }
+    });
+};

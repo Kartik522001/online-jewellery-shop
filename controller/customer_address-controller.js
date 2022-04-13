@@ -27,7 +27,7 @@ module.exports.addcustomerAddress = function (req, res) {
 }
 
 module.exports.getAllcustomerAddress = function (req, res) {
-    customerAddressModel.find().populate("user").populate("state").populate("city").exec(function (err, data) {
+    customerAddressModel.find().populate("user").populate("states").populate("city").exec(function (err, data) {
         if (err) {
             res.json({ msg: "something went wrong", data: err, status: -1 })
         }
@@ -65,6 +65,39 @@ module.exports.updatecustomerAddress = function (req, res) {
         }
         else {
             res.json({ msg: "Address Update ", data: data, status: 200 })
+        }
+    })
+}
+
+module.exports.getById = function (req, res) {
+
+    let id = req.params.custAddressId;
+
+    UserModel.findById({ _id: id }).populate("states").populate("city").populate('user').exec(function (err, data) {
+        if (err) {
+            res.json({ msg: "Something went wrong!!!", status: -1, data: err });
+        } else {
+            res.json({ msg: "users...", status: 200, data: data });
+        }
+    })
+}
+
+module.exports.updateById = function (req, res) {
+
+    let id = req.params.custAddressId;
+    let address = req.body.address
+    let pincode = req.body.pincode
+    let user = req.body.user
+    let state = req.body.state
+    let city = req.body.state
+    // let isActive = req.body.isActive
+
+
+    UserModel.findByIdAndUpdate({ _id: id }, { address: address, pincode: pincode, user: user, state: state, city: city }, function (err, data) {
+        if (err) {
+            res.json({ msg: "Something went wrong!!!", status: -1, data: err });
+        } else {
+            res.json({ msg: "users...", status: 200, data: data });
         }
     })
 }

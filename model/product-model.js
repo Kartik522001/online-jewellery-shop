@@ -8,15 +8,14 @@ const ProductSchema = new mongoose.Schema({
 
     category: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "categories"
-    },
-    subcategory: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "subcategories"
+        ref: "category"
     },
     brand: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "brands"
+    },
+    img: {
+        type: String
     },
     basePrice: {
         type: Number,

@@ -7,11 +7,13 @@ module.exports.addSubcategory = function (req, res) {
     let subcategoryName = req.body.subcategoryName
     let category = req.body.category
     let isActive = req.body.isActive
+    let img = req.body.img
 
     let subcategory = new SubcategoryModel({
         subcategoryName: subcategoryName,
         category: category,
-        isActive: isActive
+        isActive: isActive,
+        img: img
     })
     subcategory.save(function (err, data) {
         if (err) {
@@ -55,9 +57,10 @@ module.exports.updateSubcategory = function (req, res) {
     let subcategoryId = req.body.subcategoryId
     let subcategoryName = req.body.subcategoryName
     let isActive = req.body.isActive;
+    let img = req.body.img;
 
 
-    SubcategoryModel.updateOne({ _id: subcategoryId }, { subcategoryName: subcategoryName, isActive: isActive }, function (err, data) {
+    SubcategoryModel.updateOne({ _id: subcategoryId }, { img: img, subcategoryName: subcategoryName, isActive: isActive }, function (err, data) {
         if (err) {
             res.json({ msg: "Something went wrong!!!", status: -1, data: err })
         } else {
@@ -97,7 +100,8 @@ module.exports.updateById = function (req, res) {
     let id = req.params.subcategoryId
     let subcategoryName = req.body.subcategoryName
     let isActive = req.body.isActive
-    SubcategoryModel.findByIdAndUpdate({ _id: id }, { subcategoryName: subcategoryName, isActive: isActive }, function (err, data) {
+    let img = req.body.img
+    SubcategoryModel.findByIdAndUpdate({ _id: id }, { img: img, subcategoryName: subcategoryName, isActive: isActive }, function (err, data) {
         if (err) {
             res.json({ msg: "Something went wrong!!!", status: -1, data: err });
         } else {

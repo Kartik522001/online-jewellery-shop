@@ -69,3 +69,16 @@ module.exports.updatevendorProduct = function (req, res) {
     })
 
 }
+
+module.exports.getById = function (req, res) {
+
+    let id = req.params.vendorproductId;
+
+    vendorProductModel.findById({ _id: id }).populate('product').populate('vendor').exec(function (err, data) {
+        if (err) {
+            res.json({ msg: "Something went wrong!!!", status: -1, data: err });
+        } else {
+            res.json({ msg: "vendor products...", status: 200, data: data });
+        }
+    })
+}

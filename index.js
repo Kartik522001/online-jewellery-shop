@@ -64,13 +64,14 @@ app.get("/users/:userId", userController.getById);
 app.delete("/users/:userId", userController.deleteUser)
 app.post("/login", userController.login)
 app.put("/users/:userId", userController.updateById);
+app.post("/loginadmin", userController.loginAdmin)
 
 //category
-app.post("/categories", categoryController.addCategories)
-app.get("/categories", categoryController.getAllCategories)
-app.delete("/categories/:categoryId", categoryController.deleteCategory)
-app.get("/categories/:categoryId", categoryController.getById);
-app.put("/categories/:categoryId", categoryController.updateById);
+app.post("/categorys", categoryController.addCategories)
+app.get("/categorys", categoryController.getAllCategories)
+app.delete("/categorys/:categoryId", categoryController.deleteCategory)
+app.get("/categorys/:categoryId", categoryController.getById);
+app.put("/categorys/:categoryId", categoryController.updateById);
 
 //subcategory
 app.post("/subcategories", subcategoryController.addSubcategory)
@@ -84,7 +85,7 @@ app.put("/subcategories/:subcategoryId", subcategoryController.updateById)
 //brand
 app.post("/brands", brandController.addBrands)
 app.get("/brands", brandController.getAllBrand)
-app.get("/brands", brandController.getById);
+app.get("/brands/:brandId", brandController.getById);
 app.delete("/brands/:brandId", brandController.deleteBrand)
 app.put("/brands/:brandId", brandController.updateById);
 
@@ -101,6 +102,8 @@ app.post("/cities", cityController.addCity)
 app.get("/cities", cityController.getAllcities)
 app.delete("/cities/:cityId", cityController.deleteCity)
 app.put("/cities/:cityId", cityController.updateCity)
+app.get("/cities/:cityId", cityController.getById);
+app.get("/citiesbystateid/:stateId", cityController.getByStateId);
 
 
 //vendorDetail
@@ -127,6 +130,7 @@ app.post('/orderDetails', orderDetailController.addOrderDetail);
 app.get('/orderDetails', orderDetailController.getAllOrder_details);
 app.delete('/orderDetails/:orderId', orderDetailController.deleteorderDetail);
 app.put('/orderDetails/:orderId', orderDetailController.updateorderDetails);
+app.get("/ordersDetails/:orderId", orderDetailController.getById)
 
 // status
 app.post('/status', statusController.addStatus);
@@ -136,10 +140,12 @@ app.put('/status/:statusId', statusController.updateStatus);
 
 // product
 app.post('/products', ProductController.addProduct);
-app.get('/products', ProductController.getAllproducts);
+app.get('/products/:category', ProductController.getAllproducts);
+app.get('/productsall', ProductController.getAllproducts1)
 app.delete('/products/:ProductId', ProductController.deleteProduct);
-app.get('/products/:productId', ProductController.getById);
+app.get('/productslist/:productId', ProductController.getById);
 app.put('/products/:productId', ProductController.updateById);
+app.get("/productone", ProductController.getoneproducts)
 
 // order
 app.post('/order', OrderController.addOrder);

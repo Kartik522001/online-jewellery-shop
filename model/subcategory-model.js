@@ -9,6 +9,9 @@ let SubcategorySchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "categories"
     },
+    img: {
+        type: String
+    },
     isActive: {
         type: Boolean
     }

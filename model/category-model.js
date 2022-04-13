@@ -5,6 +5,9 @@ const mongoose = require("mongoose");
 let CategorySchema = new mongoose.Schema({
     categoryName: {
         type: String
+    },
+    img: {
+        type: String
     }
 })
 

@@ -15,7 +15,7 @@ const vendorProductSchema = new mongoose.Schema({
     },
     price: {
         type: Number,
-    }
+    },
 })
 
 const vendorProductModel = mongoose.model("vendorProduct", vendorProductSchema)

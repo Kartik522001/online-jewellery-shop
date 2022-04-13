@@ -8,7 +8,8 @@ module.exports.addCategories = function (req, res) {
 
 
     let category = new CategoryModel({
-        categoryName: req.body.categoryName
+        categoryName: req.body.categoryName,
+        img: req.body.img
     })
 
     category.save(function (err, success) {
@@ -25,11 +26,11 @@ module.exports.addCategories = function (req, res) {
 
 module.exports.getAllCategories = function (req, res) {
     //REST 
-    CategoryModel.find(function (err, categories) {
+    CategoryModel.find(function (err, category) {
         if (err) {
             res.json({ msg: "Something went wrong!!!", status: -1, data: err })
         } else {
-            res.json({ msg: "categories...", status: 200, data: categories })
+            res.json({ msg: "categories...", status: 200, data: category })
 
         }
 
@@ -57,8 +58,9 @@ module.exports.updateCategory = function (req, res) {
 
     let categoryId = req.body.categoryId
     let categoryName = req.body.categoryName
+    let img = req.body.img
 
-    CategoryModel.updateOne({ _id: categoryId }, { categoryName: categoryName }, function (err, data) {
+    CategoryModel.updateOne({ _id: categoryId }, { categoryName: categoryName, img: img }, function (err, data) {
         if (err) {
             res.json({ msg: "Something went wrong!!!", status: -1, data: err })
         } else {
@@ -82,10 +84,11 @@ module.exports.getById = function (req, res) {
 module.exports.updateById = function (req, res) {
     let id = req.params.categoryId;
     let categoryName = req.body.categoryName;
+    let img = req.body.img
 
     CategoryModel.findByIdAndUpdate(
         { _id: id },
-        { categoryName: categoryName },
+        { categoryName: categoryName, img: img },
         function (err, data) {
             if (err) {
                 res.json({ msg: "Something went wrong!!!", status: -1, data: err });
