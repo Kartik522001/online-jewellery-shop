@@ -7,13 +7,14 @@ module.exports.addUser = function (req, res) {
     let userName = req.body.userName
     let email = req.body.email
     let password = req.body.password
+    let encPassword = bcrypt.hashSync(password, 10)
     let role = req.body.role
 
 
     let user = new UserModel({
         userName: userName,
         email: email,
-        password: password,
+        password: encPassword,
         role: role
     })
 
@@ -89,29 +90,25 @@ module.exports.deleteUser = function (req, res) {
 
 //login 
 module.exports.login = function (req, res) {
-
-    let param_email = req.body.email
-    let param_password = req.body.password
+    let email = req.body.email;
+    let password = req.body.password;
 
     let isCorrect = false;
 
-    UserModel.findOne({ email: param_email }, function (err, data) {
+    UserModel.findOne({ email: email }).populate('role').exec(function (err, data) {
         if (data) {
-            let ans = bcrypt.compareSync(param_password, data.password)
+            let ans = bcrypt.compareSync(password, data.password);
             if (ans == true) {
-                isCorrect = true
+                isCorrect = true;
             }
         }
-
         if (isCorrect == false) {
-            res.json({ msg: "Invalid Credentials...", data: req.body, status: -1 })//-1  [ 302 404 500 ]
+            res.json({ msg: "Invalid Credentials...", data: err.message, status: -1 }); //-1  [ 302 404 500 ]
         } else {
-            res.json({ msg: "Login....", data: data, status: 200 })//http status code 
+            res.json({ msg: "Login....", data: data, status: 200 }); //http status code
         }
-    })
-
-}
-
+    });
+};
 module.exports.loginAdmin = function (req, res) {
     let id = '62301d5dee1b25e47af7e8cc'
     let password = req.body.password;

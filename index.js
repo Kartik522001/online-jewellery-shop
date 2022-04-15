@@ -145,7 +145,7 @@ app.get('/productsall', ProductController.getAllproducts1)
 app.delete('/products/:ProductId', ProductController.deleteProduct);
 app.get('/productslist/:productId', ProductController.getById);
 app.put('/products/:productId', ProductController.updateById);
-app.get("/productone", ProductController.getoneproducts)
+app.get("/productone/:category", ProductController.getoneproducts)
 
 // order
 app.post('/order', OrderController.addOrder);

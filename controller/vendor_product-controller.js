@@ -28,7 +28,7 @@ module.exports.addvendorProduct = function (req, res) {
 }
 
 module.exports.getAllvendorProducts = function (req, res) {
-    vendorProductModel.find().populate("product").populate("vendorDetail").exec(function (err, data) {
+    vendorProductController.find().populate("product").populate("vendorDetail").exec(function (err, data) {
         if (err) {
             res.json({ msg: "SMW", status: -1, data: err })
         } else {
@@ -74,7 +74,7 @@ module.exports.getById = function (req, res) {
 
     let id = req.params.vendorproductId;
 
-    vendorProductModel.findById({ _id: id }).populate('product').populate('vendor').exec(function (err, data) {
+    vendorProductController.findById({ _id: id }).populate('product').populate('vendor').exec(function (err, data) {
         if (err) {
             res.json({ msg: "Something went wrong!!!", status: -1, data: err });
         } else {

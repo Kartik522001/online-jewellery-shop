@@ -120,6 +120,7 @@ module.exports.updateById = function (req, res) {
 }
 
 module.exports.getoneproducts = (req, res) => {
+    // let id = req.params.categoryId;
     ProductModel.findOne().populate("category").exec(function (err, data) {
         if (err) {
             res.json({ msg: "something went wrong", data: err, status: -1 })
