@@ -17,7 +17,7 @@ const ProductSchema = new mongoose.Schema({
     img: {
         type: String
     },
-    basePrice: {
+    baseprice: {
         type: Number,
     }
 })

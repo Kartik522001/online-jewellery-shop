@@ -103,7 +103,7 @@ module.exports.login = function (req, res) {
             }
         }
         if (isCorrect == false) {
-            res.json({ msg: "Invalid Credentials...", data: err.message, status: -1 }); //-1  [ 302 404 500 ]
+            res.json({ msg: "Invalid Credentials...", data: err, status: -1 }); //-1  [ 302 404 500 ]
         } else {
             res.json({ msg: "Login....", data: data, status: 200 }); //http status code
         }

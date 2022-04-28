@@ -3,6 +3,7 @@ const cors = require('cors')
 const mongoose = require('mongoose');
 
 const sessionController = require("./controller/session-controller");
+const contentController = require("./controller/content-controller");
 const rolesController = require("./controller/role-controller");
 const userController = require("./controller/user-controller");
 const categoryController = require("./controller/category-controller");
@@ -145,7 +146,7 @@ app.get('/productsall', ProductController.getAllproducts1)
 app.delete('/products/:ProductId', ProductController.deleteProduct);
 app.get('/productslist/:productId', ProductController.getById);
 app.put('/products/:productId', ProductController.updateById);
-app.get("/productone/:category", ProductController.getoneproducts)
+app.get("/productone", ProductController.getoneproducts)
 
 // order
 app.post('/order', OrderController.addOrder);
@@ -170,6 +171,11 @@ app.post("/productimgs", VProductImgController.addproductimg)
 app.get("/productimgs", VProductImgController.getAllProductImg)
 app.delete("/productimgs/:productImgId", VProductImgController.deleteProductImg)
 app.put("/productimgs/:ProductImgId", VProductImgController.updateproductImg)
+
+// 
+app.post("/content", contentController.addMessage);
+app.get("/content", contentController.getAllMessage);
+app.delete('/content/:contactusId', contentController.deleteMessage);
 
 app.listen(port, () => {
     console.log(`server started in http://localhost:${port}`);
