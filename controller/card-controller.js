@@ -1,14 +1,14 @@
 const CardModel = require('../model/card-model');
 
 module.exports.addCard = function (req, res) {
-    let user = req.body.user;
-    let vendorProduct = req.body.vendorProduct;
-    let qty = req.body.qty;
+    let baseprice = req.body.baseprice
+    let productName = req.body.productName
+    let user = req.body.user
 
     let Card = new CardModel({
+        baseprice: baseprice,
+        productName: productName,
         user: user,
-        vendorProduct: vendorProduct,
-        qty: qty
     })
 
     Card.save(function (err, data) {
@@ -21,7 +21,7 @@ module.exports.addCard = function (req, res) {
 }
 
 module.exports.getAllcarts = function (req, res) {
-    CardModel.find().populate("user").populate("vendorproduct").exec(function (err, data) {
+    CardModel.find(function (err, data) {
         if (err) {
             res.json({ msg: "Somthing went wrong", status: -1, data: err })
         } else {
@@ -55,5 +55,31 @@ module.exports.updatecart = function (req, res) {
         } else {
             res.json({ msg: "updated...", status: 200, data: data })
         }
+    })
+}
+
+
+module.exports.total = function (req, res) {
+    let total = 0;
+    let baseprice = req.body.baseprice;
+    CardModel.find(function (err, data) {
+        if (data) {
+            res.json({ msg: "updated...", status: 200, data: data })
+        }
+        else {
+            res.json({ msg: "Something went wrong!!!", status: -1, data: err })
+        }
+    })
+}
+
+module.exports.onebyone = function (req, res) {
+    let userId = req.params.userId
+    CardModel.find({ user: userId }).populate('user').exec(function (err, data) {
+        if (err) {
+            res.json({ msg: "Somthing went wrong", status: -1, data: err })
+        } else {
+            res.json({ msg: "show your list", status: 200, data: data })
+        }
+
     })
 }

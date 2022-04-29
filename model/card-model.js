@@ -3,17 +3,15 @@ const mongoose = require("mongoose")
 
 let cardSchema = new mongoose.Schema({
 
+    productName: {
+        type: String,
+    },
+    baseprice: {
+        type: Number,
+    },
     user: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "users"
-    },
-
-    vendorProduct: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "vendorProduct"
-    },
-    qty: {
-        type: Number,
+        ref: "user"
     }
 })
 

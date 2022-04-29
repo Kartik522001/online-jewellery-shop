@@ -119,6 +119,8 @@ app.post("/cards", cardController.addCard);
 app.get("/cards", cardController.getAllcarts);
 app.put("/cards/:cardId", cardController.updatecart);
 app.delete("/cards/:cardId", cardController.deleteCard);
+app.get('/cartone', cardController.total);
+app.get('/cartone/:userId', cardController.onebyone);
 
 // customerAddress
 app.post("/customerAddress", customerAddressController.addcustomerAddress);
