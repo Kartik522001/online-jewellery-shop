@@ -60,9 +60,8 @@ module.exports.updatecart = function (req, res) {
 
 
 module.exports.total = function (req, res) {
-    let total = 0;
-    let baseprice = req.body.baseprice;
-    CardModel.find(function (err, data) {
+    let total = req.body.total
+    CardModel.findOne({}).exec(function (err, data) {
         if (data) {
             res.json({ msg: "updated...", status: 200, data: data })
         }

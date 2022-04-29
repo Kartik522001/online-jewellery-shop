@@ -1,5 +1,5 @@
 const mongoose = require("mongoose")
-
+const total = 0
 
 let cardSchema = new mongoose.Schema({
 
