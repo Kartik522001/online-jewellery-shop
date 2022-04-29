@@ -120,9 +120,10 @@ module.exports.updateById = function (req, res) {
 }
 
 module.exports.getoneproducts = (req, res) => {
-    ProductModel.find().populate("category").exec(function (err, data) {
+    let categoryId = req.params.categoryId;
+    ProductModel.find({ category: categoryId }).exec(function (err, data) {
         if (err) {
-            res.json({ msg: "something went wrong", data: err, status: -1 })
+            res.json({ msg: "something went wrong", data: err.message, status: -1 })
         }
         else {
             res.json({ msg: "Cities ret... ", data: data, status: 200 })
