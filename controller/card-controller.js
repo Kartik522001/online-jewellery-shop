@@ -82,3 +82,15 @@ module.exports.onebyone = function (req, res) {
 
     })
 }
+
+
+module.exports.getAllcartsadmin = function (req, res) {
+    CardModel.find().populate('user').exec(function (err, data) {
+        if (err) {
+            res.json({ msg: "Somthing went wrong", status: -1, data: err })
+        } else {
+            res.json({ msg: "show your list", status: 200, data: data })
+        }
+
+    })
+}
